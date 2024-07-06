@@ -19,7 +19,7 @@ def get_password_hash(password):
 
 @router.post("/register", response_model=dict)
 async def register_user(user: RegisterUser):
-    existing_user = await users_collection.find_one({"username": user.username})
+    existing_user = users_collection.find_one({"username": user.username})
     if existing_user:
         raise HTTPException(
             status_code=400,
@@ -30,6 +30,6 @@ async def register_user(user: RegisterUser):
         "username": user.username,
         "hashed_password": hashed_password,
     }
-    new_user = await users_collection.insert_one(user_data)
-    created_user = await users_collection.find_one({"_id": new_user.inserted_id})
+    new_user = users_collection.insert_one(user_data)
+    created_user = users_collection.find_one({"_id": new_user.inserted_id})
     return {"id": str(created_user["_id"]), "username": created_user["username"]}
