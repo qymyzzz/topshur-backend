@@ -13,6 +13,6 @@ app.include_router(register_router, tags=["register"])
 if __name__ == "__main__":
     import uvicorn
 
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=5000)
 
 # python -m uvicorn main:app --reload

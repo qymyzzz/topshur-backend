@@ -7,7 +7,7 @@ def upload_audio(file_path, token):
     mime_type, _ = mimetypes.guess_type(file_path)
     if mime_type is None:
         mime_type = "application/octet-stream"
-    upload_url = "http://127.0.0.1:8000/upload-audio"
+    upload_url = "https://topshur-backend.onrender.com/upload-audio"
     with open(file_path, "rb") as file:
         files = {"file": (file_path, file, mime_type)}
         headers = {"Authorization": f"Bearer {token}"}
@@ -17,7 +17,7 @@ def upload_audio(file_path, token):
 
 
 def register(username, password):
-    url = "http://127.0.0.1:8000/register/"
+    url = "https://topshur-backend.onrender.com/register"
     user_data = {"username": username, "password": password}
     response = requests.post(url, json=user_data)
     print(f"Status Code: {response.status_code}")
@@ -25,14 +25,14 @@ def register(username, password):
 
 
 def login(username, password):
-    login_url = "http://127.0.0.1:8000/login/token"
+    login_url = "https://topshur-backend.onrender.com/login/token"
     login_data = {"username": username, "password": password}
     login_response = requests.post(login_url, data=login_data)
     token = login_response.json().get("access_token")
     print(token)
 
 
-# register("username", "password")
+register("username", "password")
 # upload_audio(
 #     "audio_path",
 #     "login_token",
