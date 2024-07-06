@@ -41,6 +41,6 @@ async def upload_audio(
         "audio_data": audio_content,
     }
 
-    await collection.insert_one(audio_document)
+    collection.insert_one(audio_document)
 
     return JSONResponse(content={"file_id": file_id}, status_code=201)

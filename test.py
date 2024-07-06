@@ -33,8 +33,8 @@ def login(username, password):
 
 
 # register("username", "password")
-# upload_audio(
-#     "audio_path",
-#     "login_token",
-# )
-login("username", "password")
+upload_audio(
+    "/Users/a1/topshur/dataset/1882.wav",
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VybmFtZSIsImV4cCI6MTcyMDI3MDgzOH0.bEjU2sRPcMn-TAemHtqOfBdEJOUNfoWOIseG1L0CzZA",
+)
+# login("username", "password")
