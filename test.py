@@ -32,9 +32,9 @@ def login(username, password):
     print(token)
 
 
-register("username", "password")
+# register("username", "password")
 # upload_audio(
 #     "audio_path",
 #     "login_token",
 # )
-# login("username", "password")
+login("username", "password")

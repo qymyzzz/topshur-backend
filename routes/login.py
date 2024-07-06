@@ -39,7 +39,7 @@ def verify_password(plain_password, hashed_password):
 
 
 async def get_user(username: str):
-    user = await users_collection.find_one({"username": username})
+    user = users_collection.find_one({"username": username})
     if user:
         return UserInDB(**user)
 
