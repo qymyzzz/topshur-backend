@@ -1,10 +1,24 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
 from routes.login import router as login_router
 from routes.register import router as register_router
 from routes.upload_audio import router as audio_router
 
 app = FastAPI()
+
+origins = [
+    "http://localhost:3000",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,  # Allows specific origins
+    allow_credentials=True,
+    allow_methods=["*"],  # Allows all methods
+    allow_headers=["*"],  # Allows all headers
+)
+
 
 app.include_router(audio_router)
 app.include_router(login_router, tags=["login"])
