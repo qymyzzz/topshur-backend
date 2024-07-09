@@ -1,7 +1,7 @@
 import mimetypes
 
 from bson import ObjectId
-from fastapi import APIRouter, Depends, File, HTTPException, UploadFile
+from fastapi import APIRouter, Depends, File, Form, HTTPException, UploadFile
 from fastapi.responses import JSONResponse
 
 from db.database import db
@@ -23,7 +23,9 @@ ALLOWED_EXTENSIONS = [".mp3", ".wav", ".ogg"]
 
 @router.post("/upload-audio")
 async def upload_audio(
-    file: UploadFile = File(...), token_data: TokenData = Depends(get_current_user)
+    file: UploadFile = File(...),
+    token_data: TokenData = Depends(get_current_user),
+    transcript: str = Form(""),
 ):
     if file.content_type not in ALLOWED_AUDIO_TYPES:
         raise HTTPException(
@@ -39,8 +41,11 @@ async def upload_audio(
         "username": token_data.username,
         "content_type": file.content_type,
         "audio_data": audio_content,
+        "transcript": transcript,
     }
 
     collection.insert_one(audio_document)
 
-    return JSONResponse(content={"file_id": file_id}, status_code=201)
+    return JSONResponse(
+        content={"file_id": file_id, "transcript": transcript}, status_code=201
+    )

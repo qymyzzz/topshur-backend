@@ -1,3 +1,4 @@
+from bson import ObjectId
 from fastapi import APIRouter, HTTPException
 from passlib.context import CryptContext
 from pydantic import BaseModel
@@ -11,6 +12,7 @@ pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 class RegisterUser(BaseModel):
     username: str
     password: str
+    disorder: str
 
 
 def get_password_hash(password):
@@ -29,7 +31,12 @@ async def register_user(user: RegisterUser):
     user_data = {
         "username": user.username,
         "hashed_password": hashed_password,
+        "disorder": user.disorder,
     }
     new_user = users_collection.insert_one(user_data)
     created_user = users_collection.find_one({"_id": new_user.inserted_id})
-    return {"id": str(created_user["_id"]), "username": created_user["username"]}
+    return {
+        "id": str(created_user["_id"]),
+        "username": created_user["username"],
+        "disorder": created_user["disorder"],
+    }
