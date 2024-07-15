@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from routes.add_disorder import router as disorder_router
 from routes.login import router as login_router
 from routes.register import router as register_router
 from routes.upload_audio import router as audio_router
@@ -22,6 +23,7 @@ app.add_middleware(
 
 app.include_router(audio_router)
 app.include_router(login_router, tags=["login"])
+app.include_router(disorder_router)
 app.include_router(register_router, tags=["register"])
 
 if __name__ == "__main__":

@@ -23,6 +23,7 @@ def register(username, password, disorder):
     response = requests.post(url, json=user_data)
     print(f"Status Code: {response.status_code}")
     print("Response JSON:", response.json())
+    print(response.json().get("access_token"))
 
 
 def login(username, password):
@@ -33,10 +34,21 @@ def login(username, password):
     print(token)
 
 
+def add_disorder(username, disorder):
+    url = "https://topshur-backend.onrender.com/add_disorder"
+    disorder_data = {"username": username, "disorder": disorder}
+    response = requests.post(url, json=disorder_data)
+    print(f"Status Code: {response.status_code}")
+    print("Response JSON:", response.json())
+
+
 # register("username", "password", "disorder")
+
 # upload_audio(
 #     "audio_file_path",
 #     "login_token",
 #     "transcript_text",
 # )
 # login("username", "password")
+
+# add_disorder("username", "sohuf")
