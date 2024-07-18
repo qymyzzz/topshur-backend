@@ -8,7 +8,11 @@ from routes.upload_audio import router as audio_router
 
 app = FastAPI()
 
-origins = ["http://localhost:3000", "https://nneurons.vercel.app/"]
+origins = [
+    "http://localhost:3000",
+    "https://nneurons.vercel.app/",
+    "https://topshur.vercel.app/",
+]
 
 app.add_middleware(
     CORSMiddleware,
