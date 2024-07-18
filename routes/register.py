@@ -54,6 +54,7 @@ async def register_user(user: RegisterUser):
         "username": user.username,
         "hashed_password": hashed_password,
         "disorder": user.disorder,
+        "back_link": "",
     }
     new_user = users_collection.insert_one(user_data)
     created_user = users_collection.find_one({"_id": new_user.inserted_id})
@@ -67,6 +68,7 @@ async def register_user(user: RegisterUser):
         "id": str(created_user["_id"]),
         "username": created_user["username"],
         "disorder": created_user["disorder"],
+        "back_link": created_user["back_link"],
         "access_token": access_token,
         "token_type": "bearer",
     }
