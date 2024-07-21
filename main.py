@@ -4,6 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from routes.add_disorder import router as disorder_router
 from routes.get_audio import router as get_audio_router
 from routes.get_audios import router as get_audios
+from routes.get_back_link import router as get_back_link
 from routes.login import router as login_router
 from routes.register import router as register_router
 from routes.upload_audio import router as audio_router
@@ -29,6 +30,7 @@ app.include_router(audio_router)
 app.include_router(login_router, tags=["login"])
 app.include_router(disorder_router)
 app.include_router(get_audios)
+app.include_router(get_back_link)
 app.include_router(get_audio_router)
 app.include_router(register_router, tags=["register"])
 
