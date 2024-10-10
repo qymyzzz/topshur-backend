@@ -8,7 +8,7 @@ from routes.login import TokenData, get_current_user
 router = APIRouter()
 
 
-@router.get("/get-back-link")
+@router.get("/get_back_link")
 async def get_back_link(token_data: TokenData = Depends(get_current_user)):
     try:
         username = token_data.username

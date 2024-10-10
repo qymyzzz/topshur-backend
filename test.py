@@ -31,7 +31,7 @@ def login(username, password):
     login_data = {"username": username, "password": password}
     login_response = requests.post(login_url, data=login_data)
     token = login_response.json().get("access_token")
-    print(token)
+    return token
 
 
 def add_disorder(username, disorder):
@@ -40,6 +40,16 @@ def add_disorder(username, disorder):
     response = requests.post(url, json=disorder_data)
     print(f"Status Code: {response.status_code}")
     print("Response JSON:", response.json())
+
+
+def get_back_link(token):
+    url = "https://topshur-backend.onrender.com/get_back_link"
+    headers = {"Authorization": f"Bearer {token}"}
+    response = requests.get(url, headers=headers)
+
+    print(f"Status Code: {response.status_code}")
+    print("Response JSON:", response.json())
+    return response.json()
 
 
 # register("username", "password", "disorder")
